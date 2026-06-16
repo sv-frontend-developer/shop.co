@@ -12,7 +12,7 @@
     <div class="sale-line">
       <div class="container">
         <p>Sign up and get 20% off to your first order. <a>Sign Up Now</a></p>
-        <button type="button"><img src="HomePage/header/sale-cross.svg" alt="" width="20" height="20" /></button>
+        <button class="close-btn-sale-line" type="button"><img src="HomePage/header/sale-cross.svg" alt="" width="20" height="20" /></button>
       </div>
     </div>
     <div class="container">
@@ -27,8 +27,9 @@
           <li><a class="hover" href="Product Detail Page.html">New Arrivals</a></li>
           <li><a class="hover" href="Category Page.html">Brands</a></li>
         </ul>
-        <label>
+        <label class="search-wrapper">
           <input class="header-search" type="search" placeholder="Search for products..." />
+          <button class="search-clear-btn" type="button"><img src="HomePage/header/close-search-field.svg" alt="" width="20" height="20" /></button>
         </label>
         <div class="header-icon">
           <a class="header-search-black" href="#"><img src="HomePage/header/search-icon-black.svg" alt="" width="24" height="24" /></a>
@@ -140,8 +141,14 @@
       <div class="container">
         <h3>Stay upto date about our latest offers</h3>
         <div class="email-button">
-          <input type="email" placeholder="Enter your email address" />
-          <button type="button">Subscribe to Newsletter</button>
+          <label class="email-wrapper">
+            <input class="email" type="email" placeholder="Enter your email address" />
+            <button class="email-clear-btn" type="button"><img src="HomePage/header/close-search-field.svg" alt="" width="20" height="20" /></button>
+          </label>
+          <div class="btn-error">
+            <button class="subscribe" type="button">Subscribe to Newsletter</button>
+            <div id="email-error" class="error-message"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -212,6 +219,8 @@
     </div>
   </footer>
 
-  
+  <script src="sale-line.js"></script>
+  <script src="header-search.js"></script>
+  <script src="email-sub.js"></script>
 </body>
 </html>

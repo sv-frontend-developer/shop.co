@@ -112,14 +112,32 @@ a {
 }
 
 .sale-line  {
+  display: block;
   width: 100%;
   background-color: #000;
+  overflow: hidden;
+  max-height: 80px;
+  opacity: 1;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.sale-line.d-none {
+  display: none !important;
+}
+
+.sale-line.hidden {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  transition:  max-height 0.5s ease, opacity 0.5s ease;
 }
 
 .sale-line .container {
-  padding: 10px 0;
+  padding: 0;
   gap: 10px;
   position: relative;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .sale-line p {
@@ -138,7 +156,7 @@ a {
   color: #fff;
 }
 
-.sale-line button {
+.close-btn-sale-line {
   width: 20px;
   height: 20px;
   position: absolute;
@@ -148,7 +166,7 @@ a {
   cursor: pointer;
 }
 
-.sale-line button img {
+.close-btn-sale-line img {
   width: 20px;
   height: auto;
 }
@@ -239,8 +257,12 @@ input.header-search {
     padding-left 0.3s ease;
 }
 
-input[type="search"]::-webkit-search-cancel-button {
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
   display: none;
+  -webkit-appearance: none;
 }
 
 input.header-search::placeholder {
@@ -249,10 +271,22 @@ input.header-search::placeholder {
 }
 
 input.header-search:focus::placeholder {
-  color: transparent;
+  opacity: 0 !important;
+  transition: none !important;
 }
 
-input.header-search:focus {
+input.header-search:focus::-webkit-input-placeholder {
+  opacity: 0 !important;
+  transition: none !important;
+}
+
+input.header-search:focus::-moz-placeholder {
+  opacity: 0 !important;
+  transition: none !important;
+}
+
+input.header-search:focus,
+input.header-search:not(:placeholder-shown) {
   background-position: left -40px center;
   padding-left: 20px;
 }
@@ -264,17 +298,19 @@ input.header-search:focus {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
+  background: transparent;
   border: none;
   padding: 0;
   cursor: pointer;
   z-index: 2;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  outline: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-input.header-search:not(:placeholder-shown) + .search-clear-btn {
+input.header-search:not(:placeholder-shown) + .search-clear-btn
+ {
   opacity: 1;
   visibility: visible;
 }
@@ -293,6 +329,12 @@ input.header-search:not(:placeholder-shown) + .search-clear-btn {
   width: 24px;
   height: auto;
   cursor: pointer;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.header-icon img:hover {
+  transform: scale(1.1);
 }
 
 @media (max-width: 1920px) {
@@ -825,7 +867,13 @@ p.sale {
   margin-right: 60px;
 }
 
-.email-button input {
+.email-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+input.email {
   width: 100%;
   background: #fff url("HomePage/block-reviews/email-icon.svg") no-repeat left 16px center;
   padding: 16px 20px 16px 52px;
@@ -841,21 +889,62 @@ p.sale {
     padding-left 0.3s ease;
 }
 
-.email-button input::placeholder {
-  color: rgba(0, 0, 0, 40%);
+input.email::placeholder {
+  color: rgba(0, 0, 0, 0.4);
   transition: color 0.3s ease;
 }
 
-.email-button input:focus::placeholder {
-  color: transparent;
+input.email:focus::placeholder {
+  opacity: 0 !important;
+  transition: none !important;
 }
 
-.email-button input:focus {
-  background-position: left -40px center; 
+input.email:focus::-webkit-input-placeholder {
+  opacity: 0 !important;
+  transition: none !important;
+}
+
+input.email:focus::-moz-placeholder {
+  opacity: 0 !important;
+  transition: none !important;
+}
+
+input.email:focus,
+input.email:not(:placeholder-shown) {
+  background-position: left -40px center;
   padding-left: 20px;
 }
 
-.email-button button {
+.email-clear-btn {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  outline: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+input.email:not(:placeholder-shown) + .email-clear-btn
+ {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-error {
+  width: 100%;
+  position: relative;
+}
+
+.email-button button.subscribe {
   width: 100%;
   background-color: #fff;
   border: none;
@@ -864,9 +953,22 @@ p.sale {
   transition: transform 0.5s ease;
 }
 
-.email-button button:hover {
+.email-button button.subscribe:hover {
   transform: scale(1.05);
   cursor: pointer;
+}
+
+.error-message {
+  position: absolute;
+  bottom: -30px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: red;
+  width: 100%;
+  text-align: center;
+  display: block;
+  min-height: 20px;
 }
 
 /* footer */
