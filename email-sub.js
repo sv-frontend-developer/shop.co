@@ -10,7 +10,7 @@ if(emailInput && emailBtnClear) {
 
     const errorBlock = document.getElementById('email-error');
     if (errorBlock) {
-      errorBlock.innerHTML = '';
+      errorBlock.textContent = '';
     }
 
     console.log("Field of email cleared");
@@ -32,9 +32,9 @@ if(subscribeBtn && emailInput) {
     console.log(fail);
 
     if(fail != '') {
-      if (errorDisplay) errorDisplay.innerHTML = fail;
+      if (errorDisplay) errorDisplay.textContent = fail;
     } else {
-      if (errorDisplay) errorDisplay.innerHTML = '';
+      if (errorDisplay) errorDisplay.textContent = '';
       alert("You have subscribed to the newsletter.")
       emailInput.value = '';
     }
