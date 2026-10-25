@@ -18,22 +18,24 @@ document.addEventListener('DOMContentLoaded', () => {
     font-size: 12px;
   `;
 
-  let count = Number(localStorage.getItem('cartCount')) || 0;
+  let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
   function updateCartUI() {
+    const count = cartItems.length;
+
     if (count > 0) {
-      if (!cartBox.contains(counterIcon)) {
+      if (cartBox && !cartBox.contains(counterIcon)) {
         cartBox.style.cssText = ' position: relative; ';
         cartBox.append(counterIcon);
       }
       counterIcon.textContent = count;
     } else {
-      if (cartBox.contains(counterIcon)) {
+      if (cartBox && cartBox.contains(counterIcon)) {
         counterIcon.remove();
       }
     }
 
-    localStorage.setItem('cartCount', count);
+    localStorage.setItem('cartCount', JSON.stringify(cartItems));
   }
 
   window.addEventListener('storage', event => {
@@ -51,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateCartUI();
     });
   }
+
   // mainBtn.addEventListener('click', () => {
   //   count++;
 
