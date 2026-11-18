@@ -197,6 +197,52 @@ a {
   padding: 24px 10px 24px 0;
   gap: 40px;
   row-gap: 20px;
+  position: relative;
+}
+
+.menu-hidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f2f0f1;
+  border-bottom: 1px solid #000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  box-sizing: border-box;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  will-change: opcity, visibility;
+}
+
+.cross-close-menu {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  background: url("HomePage/header/sale-cross.svg") center no-repeat;
+  filter: invert(1);
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  will-change: transform;
+}
+
+.cross-close-menu:hover {
+  transform: scale(1.2);
+}
+
+.menu-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  z-index: 100;
 }
 
 .logo {
@@ -229,7 +275,7 @@ a {
   bottom: -2px;
   left: 50%;
   width: 0;
-  height: 2px;
+  height: 1px;
   background-color: black;
   transition: width 0.3s ease, left 0.3s ease;
   will-change: width, left;
@@ -278,7 +324,7 @@ a {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  z-index: 100;
+  z-index: 200;
   transition: transform 0.5s ease, visibility 0.5s ease, opacity 0.5s ease;
 }
 
@@ -288,13 +334,15 @@ a {
   pointer-events: auto;
 }
 
-.drop-down li a {
+
+.show-more {
+  width: fit-content;
   position: relative;
   cursor: pointer;
   text-decoration: none;
 }
 
-.drop-down li a::after {
+.show-more::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -306,7 +354,7 @@ a {
   will-change: width, left;
 }
 
-.drop-down li a:hover::after {
+.show-more:hover::after {
   width: 100%;
   left: 0;
 }
@@ -396,8 +444,7 @@ input.header-search:not(:placeholder-shown) {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-input.header-search:not(:placeholder-shown) + .search-clear-btn
- {
+input.header-search:not(:placeholder-shown) + .search-clear-btn {
   opacity: 1;
   visibility: visible;
 }
@@ -444,10 +491,6 @@ input.header-search:not(:placeholder-shown) + .search-clear-btn
   .header-main {
     flex-wrap: wrap;
   }
-
-  /* .ul-header-main {
-    padding-right: 10px;
-  } */
 }
 
 @media (max-width: 910px) {
@@ -478,11 +521,18 @@ input.header-search:not(:placeholder-shown) + .search-clear-btn
     display: flex;
     align-items: center;
     padding: 0 10px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    will-change: transform;
   }
 
   .burger-menu img {
     width: 24px;
     height: auto;
+  }
+
+  .burger-menu:hover {
+    transform: scale(1.1);
   }
 
   .logo {
@@ -491,6 +541,10 @@ input.header-search:not(:placeholder-shown) + .search-clear-btn
 }
 
 @media (max-width: 400px) {
+  .sale-line {
+    padding-block: 10px;
+  }
+  
   .sale-line p {
     display: flex;
     flex-direction: column;
@@ -500,7 +554,7 @@ input.header-search:not(:placeholder-shown) + .search-clear-btn
 
 /* hero-block */
 .hero-block {
-  background: #f2f0f1 url("HomePage/block-hero/hero-background.png") no-repeat right center;
+  background: #f2f0f1 url("HomePage/block-hero/hero-background.png") no-repeat right center ;
   position: relative;
 }
 
@@ -717,6 +771,7 @@ input.header-search:not(:placeholder-shown) + .search-clear-btn
 
   .statistics-includ-2 {
     padding-left: 32px;
+    padding-right: 0;
     justify-self: start;
   }
 
@@ -737,6 +792,7 @@ input.header-search:not(:placeholder-shown) + .search-clear-btn
     display: flex;
     flex-direction: column;
     align-items: center;
+    row-gap: 10px;
   }
 
   .statistics > :nth-child(n) {
@@ -744,14 +800,13 @@ input.header-search:not(:placeholder-shown) + .search-clear-btn
     border: none;
   }
 
-  .statistics > :nth-child(1) {
-    align-self: flex-start;
-    padding-left: 40px;
+  .statistics > :not(:last-child) {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 10%);
   }
 
-  .statistics > :nth-child(3) {
-    align-self: flex-end;
-    padding-right: 40px;
+  .statistics-includ {
+    align-items: center;
   }
 }
 
